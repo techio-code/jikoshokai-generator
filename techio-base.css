@@ -1,0 +1,707 @@
+/* ============================================
+   techio design system v1.0
+   共通デザインシステム - 全アプリで使い回すベースCSS
+   ============================================ */
+
+/* --- Google Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap');
+
+/* ============================================
+   1. CSS Variables（カラー・フォント・影）
+   ============================================ */
+:root {
+  /* --- メインカラー（アプリごとに上書き可能） --- */
+  --color-primary: #6C5CE7;
+  --color-primary-light: #A29BFE;
+  --color-primary-dark: #5A4BD1;
+
+  /* --- サブカラー --- */
+  --color-secondary: #00B894;
+  --color-secondary-light: #55EFC4;
+
+  /* --- アクセントカラー --- */
+  --color-accent: #FD79A8;
+  --color-accent-light: #FDA7DF;
+
+  /* --- ニュートラル（グレー系） --- */
+  --color-bg: #F8F9FD;
+  --color-bg-card: #FFFFFF;
+  --color-bg-dark: #1A1A2E;
+  --color-text: #2D3436;
+  --color-text-light: #636E72;
+  --color-text-muted: #B2BEC3;
+  --color-border: #E0E0E0;
+  --color-border-light: #F0F0F0;
+
+  /* --- ステータスカラー --- */
+  --color-success: #00B894;
+  --color-warning: #FDCB6E;
+  --color-danger: #E17055;
+  --color-info: #74B9FF;
+
+  /* --- フォント --- */
+  --font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 2rem;
+  --font-size-4xl: 2.5rem;
+
+  /* --- 余白 --- */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+
+  /* --- 影 --- */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+  --shadow-lg: 0 10px 30px rgba(0,0,0,0.1), 0 4px 8px rgba(0,0,0,0.05);
+  --shadow-xl: 0 20px 50px rgba(0,0,0,0.12), 0 8px 16px rgba(0,0,0,0.06);
+  --shadow-glow: 0 0 20px rgba(108, 92, 231, 0.3);
+
+  /* --- 角丸 --- */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* --- トランジション --- */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms ease;
+
+  /* --- コンテナ幅 --- */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1200px;
+}
+
+/* ============================================
+   2. リセット & ベース
+   ============================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--color-text);
+  background: var(--color-bg);
+  min-height: 100vh;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-primary-dark);
+}
+
+/* ============================================
+   3. タイポグラフィ
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--color-text);
+}
+
+h1 { font-size: var(--font-size-4xl); letter-spacing: -0.02em; }
+h2 { font-size: var(--font-size-3xl); letter-spacing: -0.01em; }
+h3 { font-size: var(--font-size-2xl); }
+h4 { font-size: var(--font-size-xl); }
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-muted { color: var(--color-text-light); }
+.text-small { font-size: var(--font-size-sm); }
+.text-center { text-align: center; }
+
+/* ============================================
+   4. レイアウト
+   ============================================ */
+.container {
+  width: 100%;
+  max-width: var(--container-lg);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+.container--sm { max-width: var(--container-sm); }
+.container--md { max-width: var(--container-md); }
+.container--xl { max-width: var(--container-xl); }
+
+.section {
+  padding: var(--space-3xl) 0;
+}
+
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-sm { gap: var(--space-sm); }
+.gap-md { gap: var(--space-md); }
+.gap-lg { gap: var(--space-lg); }
+.gap-xl { gap: var(--space-xl); }
+
+.grid {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .grid-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================
+   5. ヘッダー
+   ============================================ */
+.t-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border-light);
+  padding: var(--space-md) 0;
+}
+
+.t-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--container-lg);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+.t-header__logo {
+  font-size: var(--font-size-xl);
+  font-weight: 900;
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.t-header__logo-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--color-primary);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: var(--font-size-sm);
+  font-weight: 900;
+}
+
+.t-header__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+  list-style: none;
+}
+
+.t-header__nav a {
+  color: var(--color-text-light);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  transition: color var(--transition-fast);
+}
+
+.t-header__nav a:hover {
+  color: var(--color-primary);
+}
+
+/* ============================================
+   6. ヒーローセクション
+   ============================================ */
+.t-hero {
+  padding: var(--space-3xl) 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.t-hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -20%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--color-primary-light) 0%, transparent 70%);
+  opacity: 0.15;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.t-hero__title {
+  font-size: var(--font-size-4xl);
+  font-weight: 900;
+  margin-bottom: var(--space-md);
+  position: relative;
+}
+
+.t-hero__subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-light);
+  margin-bottom: var(--space-xl);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ============================================
+   7. カード
+   ============================================ */
+.t-card {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border-light);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.t-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.t-card--flat {
+  box-shadow: none;
+  border: 1px solid var(--color-border);
+}
+
+.t-card--accent {
+  border-top: 3px solid var(--color-primary);
+}
+
+.t-card__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.t-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.t-card__icon--primary { background: rgba(108, 92, 231, 0.1); color: var(--color-primary); }
+.t-card__icon--success { background: rgba(0, 184, 148, 0.1); color: var(--color-success); }
+.t-card__icon--warning { background: rgba(253, 203, 110, 0.15); color: #E17055; }
+.t-card__icon--danger  { background: rgba(225, 112, 85, 0.1); color: var(--color-danger); }
+.t-card__icon--info    { background: rgba(116, 185, 255, 0.1); color: var(--color-info); }
+
+.t-card__title {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+}
+
+.t-card__desc {
+  color: var(--color-text-light);
+  font-size: var(--font-size-sm);
+  line-height: 1.8;
+}
+
+/* ============================================
+   8. ボタン
+   ============================================ */
+.t-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: 12px 28px;
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  text-decoration: none;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.t-btn:active {
+  transform: scale(0.97);
+}
+
+/* Primary */
+.t-btn--primary {
+  background: var(--color-primary);
+  color: white;
+  box-shadow: 0 4px 14px rgba(108, 92, 231, 0.35);
+}
+
+.t-btn--primary:hover {
+  background: var(--color-primary-dark);
+  box-shadow: 0 6px 20px rgba(108, 92, 231, 0.45);
+  color: white;
+  transform: translateY(-1px);
+}
+
+/* Secondary */
+.t-btn--secondary {
+  background: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+}
+
+.t-btn--secondary:hover {
+  background: var(--color-primary);
+  color: white;
+}
+
+/* Ghost */
+.t-btn--ghost {
+  background: transparent;
+  color: var(--color-text-light);
+  border: 2px solid var(--color-border);
+}
+
+.t-btn--ghost:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+/* Success */
+.t-btn--success {
+  background: var(--color-success);
+  color: white;
+  box-shadow: 0 4px 14px rgba(0, 184, 148, 0.35);
+}
+
+.t-btn--success:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 6px 20px rgba(0, 184, 148, 0.45);
+  color: white;
+  transform: translateY(-1px);
+}
+
+/* Danger */
+.t-btn--danger {
+  background: var(--color-danger);
+  color: white;
+}
+
+/* Sizes */
+.t-btn--sm { padding: 8px 18px; font-size: var(--font-size-xs); }
+.t-btn--lg { padding: 16px 36px; font-size: var(--font-size-base); }
+.t-btn--block { width: 100%; }
+
+/* ============================================
+   9. フォーム要素
+   ============================================ */
+.t-input,
+.t-select {
+  width: 100%;
+  padding: 12px 16px;
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+  background: var(--color-bg-card);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  outline: none;
+  appearance: none;
+}
+
+.t-input:focus,
+.t-select:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.15);
+}
+
+.t-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23636E72' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 44px;
+}
+
+.t-label {
+  display: block;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: var(--space-xs);
+}
+
+/* ============================================
+   10. バッジ・タグ
+   ============================================ */
+.t-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  border-radius: var(--radius-full);
+  line-height: 1.4;
+}
+
+.t-badge--primary { background: rgba(108, 92, 231, 0.1); color: var(--color-primary); }
+.t-badge--success { background: rgba(0, 184, 148, 0.1); color: var(--color-success); }
+.t-badge--warning { background: rgba(253, 203, 110, 0.2); color: #E17055; }
+.t-badge--danger  { background: rgba(225, 112, 85, 0.1); color: var(--color-danger); }
+.t-badge--info    { background: rgba(116, 185, 255, 0.1); color: #0984E3; }
+
+/* ============================================
+   11. ステップ表示
+   ============================================ */
+.t-steps {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
+}
+
+.t-step {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.t-step--active {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.t-step--done {
+  color: var(--color-success);
+}
+
+.t-step__number {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  background: var(--color-border-light);
+  color: var(--color-text-muted);
+}
+
+.t-step--active .t-step__number {
+  background: var(--color-primary);
+  color: white;
+  box-shadow: 0 2px 8px rgba(108, 92, 231, 0.3);
+}
+
+.t-step--done .t-step__number {
+  background: var(--color-success);
+  color: white;
+}
+
+.t-step__line {
+  width: 40px;
+  height: 2px;
+  background: var(--color-border);
+}
+
+.t-step--done + .t-step__line,
+.t-step--active + .t-step__line {
+  background: var(--color-primary);
+}
+
+/* ============================================
+   12. フッター
+   ============================================ */
+.t-footer {
+  background: var(--color-bg-dark);
+  color: rgba(255, 255, 255, 0.7);
+  padding: var(--space-2xl) 0;
+  text-align: center;
+  font-size: var(--font-size-sm);
+}
+
+.t-footer a {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.t-footer a:hover {
+  color: var(--color-primary-light);
+}
+
+.t-footer__links {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-xl);
+  margin-bottom: var(--space-md);
+  list-style: none;
+}
+
+/* ============================================
+   13. アニメーション
+   ============================================ */
+@keyframes t-fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes t-slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes t-slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes t-scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes t-spin {
+  to { transform: rotate(360deg); }
+}
+
+.animate-fadeIn { animation: t-fadeIn var(--transition-base) both; }
+.animate-slideUp { animation: t-slideUp var(--transition-slow) both; }
+.animate-slideDown { animation: t-slideDown var(--transition-base) both; }
+
+/* Stagger children */
+.animate-stagger > *:nth-child(1) { animation-delay: 0ms; }
+.animate-stagger > *:nth-child(2) { animation-delay: 80ms; }
+.animate-stagger > *:nth-child(3) { animation-delay: 160ms; }
+.animate-stagger > *:nth-child(4) { animation-delay: 240ms; }
+.animate-stagger > *:nth-child(5) { animation-delay: 320ms; }
+.animate-stagger > *:nth-child(6) { animation-delay: 400ms; }
+
+/* ============================================
+   14. ローディング
+   ============================================ */
+.t-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--color-border-light);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: t-spin 0.7s linear infinite;
+}
+
+.t-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-2xl);
+  color: var(--color-text-light);
+}
+
+/* ============================================
+   15. レスポンシブ
+   ============================================ */
+@media (max-width: 768px) {
+  :root {
+    --font-size-4xl: 1.875rem;
+    --font-size-3xl: 1.5rem;
+    --font-size-2xl: 1.25rem;
+  }
+
+  .container {
+    padding: 0 var(--space-md);
+  }
+
+  .section {
+    padding: var(--space-2xl) 0;
+  }
+
+  .t-header__nav {
+    display: none;
+  }
+
+  .t-hero {
+    padding: var(--space-2xl) 0;
+  }
+
+  .t-footer__links {
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+}
+
+/* ============================================
+   16. ユーティリティ
+   ============================================ */
+.mt-sm { margin-top: var(--space-sm); }
+.mt-md { margin-top: var(--space-md); }
+.mt-lg { margin-top: var(--space-lg); }
+.mt-xl { margin-top: var(--space-xl); }
+.mb-sm { margin-bottom: var(--space-sm); }
+.mb-md { margin-bottom: var(--space-md); }
+.mb-lg { margin-bottom: var(--space-lg); }
+.mb-xl { margin-bottom: var(--space-xl); }
+.p-md { padding: var(--space-md); }
+.p-lg { padding: var(--space-lg); }
+.p-xl { padding: var(--space-xl); }
+.hidden { display: none !important; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>自己紹介ジェネレーター｜シーンに合わせた自己紹介を自動生成</title>
+  <meta name="description" content="名前・職種・性格を入力するだけで、ビジネス・SNS・転職面接など場面に合った自己紹介文を自動生成。コピペですぐ使える！">
+  <meta property="og:title" content="自己紹介ジェネレーター｜シーンに合わせた自己紹介を自動生成">
+  <meta property="og:description" content="名前・職種・性格を入力するだけで、場面に合った自己紹介文を自動生成。">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="techio-base.css">
+  <link rel="stylesheet" href="techio-icons.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <header class="t-header">
+    <div class="t-header__inner">
+      <div class="t-header__logo">
+        <div class="t-header__logo-icon">自</div>
+        自己紹介ジェネレーター
+      </div>
+      <nav>
+        <ul class="t-header__nav">
+          <li><a href="https://techio-code.github.io/techio-portfolio/" target="_blank">ポートフォリオ</a></li>
+          <li><a href="https://note.com/techio_note" target="_blank" class="t-btn t-btn--primary t-btn--sm">noteを読む</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container container--md">
+
+    <!-- ヒーロー -->
+    <section class="hero">
+      <div class="hero__badge">
+        <span class="t-badge t-badge--primary">無料ツール</span>
+        <span class="t-badge t-badge--info">テンプレート自動生成</span>
+      </div>
+      <h1 class="hero__title">
+        シーンにぴったりの<br><span class="text-gradient">自己紹介</span>を作ろう
+      </h1>
+      <p class="hero__subtitle">
+        名前・職種・性格を入れるだけ。<br>
+        ビジネス・SNS・面接…場面に合わせた自己紹介文がすぐ完成！
+      </p>
+    </section>
+
+    <!-- ステップ表示 -->
+    <div class="steps-bar">
+      <div class="t-steps">
+        <div class="t-step t-step--active" id="step-indicator-1">
+          <span class="t-step__number">1</span>
+          <span>基本情報</span>
+        </div>
+        <div class="t-step__line" id="step-line-1"></div>
+        <div class="t-step" id="step-indicator-2">
+          <span class="t-step__number">2</span>
+          <span>性格・強み</span>
+        </div>
+        <div class="t-step__line" id="step-line-2"></div>
+        <div class="t-step" id="step-indicator-3">
+          <span class="t-step__number">3</span>
+          <span>生成！</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 1: 基本情報 -->
+    <section class="step-section" id="step-1">
+      <div class="t-card">
+        <h2 class="step-title">
+          <i class="icon icon-users icon--lg"></i>
+          STEP 1：基本情報を入力
+        </h2>
+
+        <div class="form-group">
+          <label class="t-label">ニックネーム / 名前 <span class="required">*</span></label>
+          <input type="text" class="t-input" id="input-name" placeholder="例：てちお、田中太郎">
+        </div>
+
+        <div class="form-group">
+          <label class="t-label">職種・肩書き <span class="required">*</span></label>
+          <input type="text" class="t-input" id="input-job" placeholder="例：Webデザイナー、営業職、大学生">
+        </div>
+
+        <div class="form-group">
+          <label class="t-label">経験年数</label>
+          <select class="t-select" id="input-experience">
+            <option value="">-- 選択してください --</option>
+            <option value="beginner">未経験・始めたばかり</option>
+            <option value="1-2">1〜2年</option>
+            <option value="3-5">3〜5年</option>
+            <option value="5-10">5〜10年</option>
+            <option value="10+">10年以上のベテラン</option>
+            <option value="student">学生</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="t-label">趣味・好きなこと（任意）</label>
+          <input type="text" class="t-input" id="input-hobby" placeholder="例：カフェ巡り、ゲーム、読書、筋トレ">
+        </div>
+
+        <button class="t-btn t-btn--primary t-btn--lg t-btn--block" onclick="goToStep(2)">
+          次へ進む
+          <i class="icon icon-arrow-right icon--sm"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- STEP 2: 性格・強み・用途 -->
+    <section class="step-section hidden" id="step-2">
+      <div class="t-card">
+        <h2 class="step-title">
+          <i class="icon icon-zap icon--lg"></i>
+          STEP 2：あなたの個性を教えて
+        </h2>
+
+        <!-- トーン選択 -->
+        <div class="form-group">
+          <label class="t-label">トーン（文体）<span class="required">*</span></label>
+          <div class="tone-grid">
+            <button class="tone-btn" data-tone="formal" onclick="selectTone(this)">
+              <span class="tone-icon">🎩</span>
+              <span class="tone-name">きっちり丁寧</span>
+              <span class="tone-desc">ビジネス向き</span>
+            </button>
+            <button class="tone-btn" data-tone="casual" onclick="selectTone(this)">
+              <span class="tone-icon">😊</span>
+              <span class="tone-name">カジュアル</span>
+              <span class="tone-desc">親しみやすい</span>
+            </button>
+            <button class="tone-btn" data-tone="humor" onclick="selectTone(this)">
+              <span class="tone-icon">😂</span>
+              <span class="tone-name">ユーモア</span>
+              <span class="tone-desc">笑いを取りたい</span>
+            </button>
+            <button class="tone-btn" data-tone="passionate" onclick="selectTone(this)">
+              <span class="tone-icon">🔥</span>
+              <span class="tone-name">情熱的</span>
+              <span class="tone-desc">熱量で伝える</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 強み選択 -->
+        <div class="form-group">
+          <label class="t-label">あなたの強み（最大3つ選んでね）</label>
+          <div class="tag-grid" id="strength-grid">
+            <button class="tag-btn" onclick="toggleTag(this)">コミュ力が高い</button>
+            <button class="tag-btn" onclick="toggleTag(this)">コツコツ努力型</button>
+            <button class="tag-btn" onclick="toggleTag(this)">アイデアマン</button>
+            <button class="tag-btn" onclick="toggleTag(this)">リーダーシップ</button>
+            <button class="tag-btn" onclick="toggleTag(this)">分析・論理的</button>
+            <button class="tag-btn" onclick="toggleTag(this)">チームワーク</button>
+            <button class="tag-btn" onclick="toggleTag(this)">行動力がある</button>
+            <button class="tag-btn" onclick="toggleTag(this)">柔軟に対応できる</button>
+            <button class="tag-btn" onclick="toggleTag(this)">教えるのが好き</button>
+            <button class="tag-btn" onclick="toggleTag(this)">好奇心旺盛</button>
+            <button class="tag-btn" onclick="toggleTag(this)">几帳面・正確</button>
+            <button class="tag-btn" onclick="toggleTag(this)">ポジティブ</button>
+          </div>
+          <p class="tag-counter"><span id="tag-count">0</span> / 3 選択中</p>
+        </div>
+
+        <!-- 用途選択 -->
+        <div class="form-group">
+          <label class="t-label">どこで使う？ <span class="required">*</span></label>
+          <div class="scene-grid">
+            <button class="scene-btn" data-scene="business" onclick="selectScene(this)">
+              <i class="icon icon-clipboard"></i>
+              <span>ビジネス<br><small>会議・名刺交換</small></span>
+            </button>
+            <button class="scene-btn" data-scene="sns" onclick="selectScene(this)">
+              <i class="icon icon-external-link"></i>
+              <span>SNS<br><small>X・note・プロフ</small></span>
+            </button>
+            <button class="scene-btn" data-scene="interview" onclick="selectScene(this)">
+              <i class="icon icon-users"></i>
+              <span>面接・転職<br><small>自己PR</small></span>
+            </button>
+            <button class="scene-btn" data-scene="party" onclick="selectScene(this)">
+              <i class="icon icon-zap"></i>
+              <span>飲み会・交流会<br><small>カジュアルな場</small></span>
+            </button>
+            <button class="scene-btn" data-scene="school" onclick="selectScene(this)">
+              <i class="icon icon-info"></i>
+              <span>学校・新学期<br><small>クラス・サークル</small></span>
+            </button>
+            <button class="scene-btn" data-scene="presentation" onclick="selectScene(this)">
+              <i class="icon icon-calendar"></i>
+              <span>プレゼン・登壇<br><small>セミナー・LT</small></span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 一言アピール -->
+        <div class="form-group">
+          <label class="t-label">一言アピール（任意）</label>
+          <input type="text" class="t-input" id="input-appeal" placeholder="例：最近AIにハマってます、猫が3匹います">
+        </div>
+
+        <div class="btn-row">
+          <button class="t-btn t-btn--ghost t-btn--lg" onclick="goToStep(1)">
+            戻る
+          </button>
+          <button class="t-btn t-btn--primary t-btn--lg" onclick="generate()" id="btn-generate">
+            自己紹介を生成する！
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 3: 結果 -->
+    <section class="step-section hidden" id="step-3">
+
+      <!-- ローディング -->
+      <div class="t-loading" id="loading">
+        <div class="t-spinner"></div>
+        <span>自己紹介を作成中...</span>
+      </div>
+
+      <!-- 結果カード群 -->
+      <div id="results" class="hidden">
+        <h2 class="result-heading">
+          <i class="icon icon-check icon--lg"></i>
+          あなたの自己紹介が完成！
+        </h2>
+        <p class="result-sub">3パターン生成しました。好きなものをコピーして使ってね！</p>
+
+        <div id="result-cards"></div>
+
+        <div class="result-actions">
+          <button class="t-btn t-btn--secondary t-btn--lg" onclick="generate()">
+            もう一回生成する
+          </button>
+          <button class="t-btn t-btn--ghost t-btn--lg" onclick="goToStep(1)">
+            最初からやり直す
+          </button>
+        </div>
+
+        <!-- シェアボタン -->
+        <div class="share-section">
+          <p class="share-label">このアプリをシェアする</p>
+          <div class="share-buttons">
+            <a id="share-x" href="#" target="_blank" class="t-btn t-btn--sm" style="background:#000;color:#fff;">
+              𝕏 でシェア
+            </a>
+          </div>
+        </div>
+      </div>
+
+      </section>
+
+  </main>
+
+  <!-- フッター -->
+  <footer class="t-footer">
+    <div class="container">
+      <ul class="t-footer__links">
+        <li><a href="https://techio-code.github.io/techio-portfolio/">ポートフォリオ</a></li>
+        <li><a href="https://note.com/techio_note">note</a></li>
+        <li><a href="https://x.com/techio_code">X (Twitter)</a></li>
+      </ul>
+      <p>© 2026 てちお - コード知識ゼロでアプリを作る人</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
